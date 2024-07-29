@@ -8,6 +8,7 @@ export const CartContext = createContext({
   setSelectedMeals: null,
   availableMeals: [],
   setAvailableMeals: null,
+  setIsModalOpen:null
 });
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
     availableMeals: availableMeals,
     setSelectedMeals: setSelectedMeals,
     setAvailableMeals: setAvailableMeals,
+    setIsModalOpen:setIsModalOpen
   };
 
   return (

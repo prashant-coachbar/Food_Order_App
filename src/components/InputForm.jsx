@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../App";
+import SuccessPage from "./SuccessPage";
 
 function Input({ label, ...props }) {
   return (
@@ -10,9 +11,10 @@ function Input({ label, ...props }) {
   );
 }
 
-export default function InputForm({ onClose }) {
+export default function InputForm({ onClose, setInCheckout }) {
   const { selectedMeals, setSelectedMeals } = useContext(CartContext);
   const [error, setError] = useState();
+  const [orderPlaced, setOrderPlaced] = useState(false);
   const cartTotal = selectedMeals.reduce((acc, el) => {
     return acc + el.price * el.quantity;
   }, 0);
@@ -25,7 +27,6 @@ export default function InputForm({ onClose }) {
       customer: data,
     };
     submitOrder(orderData);
-    onClose();
   }
 
   async function submitOrder(orderData) {
@@ -42,6 +43,7 @@ export default function InputForm({ onClose }) {
         throw new Error("Could not Place the Error");
       }
       setSelectedMeals([]);
+      setOrderPlaced(true);
     } catch (error) {
       setError(error);
     }
@@ -51,28 +53,35 @@ export default function InputForm({ onClose }) {
   }
   return (
     <>
-      <div className="cart">
-        <h2>Checkout</h2>
-        <p>Total Amount: ${cartTotal}</p>
-        <form onSubmit={handleSubmit}>
-          <Input label="Full Name" type="text" name="name" />
-          <Input label="E-mail Address" type="email" name="email" />
-          <Input label="Street" type="text" name="street" />
-          <div className="control-row">
-            <Input label="Postal Code" type="text" name="postal-code" />
-            <Input label="City" type="text" name="city" />
-          </div>
-          <br></br>
-          <div className="modal-actions">
-            <button type="reset" onClick={onClose} className="text-button">
-              Close
-            </button>
-            <button type="submit" className="button">
-              Submit Order
-            </button>
-          </div>
-        </form>
-      </div>
+      {orderPlaced ? (
+        <SuccessPage
+          setOrderPlaced={setOrderPlaced}
+          setInCheckout={setInCheckout}
+        />
+      ) : (
+        <div className="cart">
+          <h2>Checkout</h2>
+          <p>Total Amount: ${cartTotal}</p>
+          <form onSubmit={handleSubmit}>
+            <Input label="Full Name" type="text" name="name" />
+            <Input label="E-mail Address" type="email" name="email" />
+            <Input label="Street" type="text" name="street" />
+            <div className="control-row">
+              <Input label="Postal Code" type="text" name="postal-code" />
+              <Input label="City" type="text" name="city" />
+            </div>
+            <br></br>
+            <div className="modal-actions">
+              <button type="reset" onClick={onClose} className="text-button">
+                Close
+              </button>
+              <button type="submit" className="button">
+                Submit Order
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </>
   );
 }

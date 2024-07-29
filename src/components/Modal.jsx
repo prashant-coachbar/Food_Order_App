@@ -19,10 +19,13 @@ export default function Modal({ open,onClose }) {
     function handleOpenCheckout(){
         setInCheckout(true);
     }
+    function handleRemoveCheckout() {
+        setInCheckout(false);
+    }
   return createPortal(
       <>
           <dialog className="modal" ref={dialog} onClose={onClose} >
-              {open ? (inCheckout?<InputForm onClose={onClose}/>:<Cart onClose={onClose} onOpen={handleOpenCheckout}/>):null}
+              {open ? (inCheckout ? <InputForm onClose={handleRemoveCheckout} setInCheckout={ setInCheckout} />:<Cart onClose={onClose} onOpen={handleOpenCheckout}/>):null}
           </dialog>
       </>,
     document.getElementById("modal")
