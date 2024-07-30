@@ -7,7 +7,7 @@ export default function Header({ handleCartClick }) {
     <section id="main-header">
       <div id="title">
         <img src={logo} alt="A good looking burger" />
-        <h1>reactfood</h1>
+        <h1>reactfoody</h1>
       </div>
       <button className="text-button" onClick={handleCartClick}>
         Cart({selectedMeals.length})
