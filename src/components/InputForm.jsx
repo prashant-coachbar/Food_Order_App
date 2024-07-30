@@ -31,7 +31,7 @@ export default function InputForm({ onClose, setInCheckout }) {
 
   async function submitOrder(orderData) {
     try {
-      const response = await fetch("https://api.render.com/deploy/srv-cqk6t2iju9rs738hgatg?key=Z4HejqYR-iM/orders", {
+      const response = await fetch("https://food-order-app-backend-hluu.onrender.com/orders", {
         method: "POST",
         body: JSON.stringify({ order: orderData }),
         headers: {
