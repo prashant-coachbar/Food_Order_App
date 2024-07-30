@@ -31,7 +31,7 @@ export default function InputForm({ onClose, setInCheckout }) {
 
   async function submitOrder(orderData) {
     try {
-      const response = await fetch("http://localhost:3000/orders", {
+      const response = await fetch("https://api.render.com/deploy/srv-cqk6t2iju9rs738hgatg?key=Z4HejqYR-iM/orders", {
         method: "POST",
         body: JSON.stringify({ order: orderData }),
         headers: {
