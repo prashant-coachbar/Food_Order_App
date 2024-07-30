@@ -13,7 +13,7 @@ export default function AvailableMeals() {
     async function fetchMeals() {
       setIsFetching(true);
       try {
-        const response = await fetch("https://api.render.com/deploy/srv-cqk6t2iju9rs738hgatg?key=Z4HejqYR-iM/meals");
+        const response = await fetch("https://food-order-app-backend-hluu.onrender.com/meals");
         const resData = await response.json();
         // console.log(resData);
         if (!response.ok) {
