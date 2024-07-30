@@ -31,7 +31,7 @@ export default function Meals({ isFetching }) {
           meals.map((item) => (
             <li key={item.id} className="meal-item">
               <article>
-                <img src={`http://localhost:3000/${item.image}`} />
+                <img src={`https://food-order-app-backend-hluu.onrender.com/${item.image}`} />
                 <h3>{item.name}</h3>
                 <p>
                   <span className="meal-item-price">${item.price}</span>
